@@ -13,6 +13,8 @@ const config={
     measurementId: "G-JSTGMQ9K9S"
 };
 
+firebase.initializeApp(config);
+
 export const createUserProfileDocument = async (userAuth , additionalData) =>{
     if(!userAuth) return;
     const userRef=firestore.doc(`users/${userAuth.uid}`);
@@ -29,13 +31,11 @@ export const createUserProfileDocument = async (userAuth , additionalData) =>{
                 ...additionalData
             });
         }catch (error) {
-            console.log("eeror creating User", error.message);
+            console.log("error creating User", error.message);
         }
     }
     return userRef;
 };
-
-firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
